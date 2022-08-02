@@ -32,7 +32,7 @@ function listarProdutos(produtos){
 
 listarProdutos(produtos)
 
-function listarhortifruti(produtos){
+function listar(produtos){
     let newArr = []
     for(let i=0;i<produtos.length;i++){
         let item = produtos[i]
@@ -160,6 +160,13 @@ botaoBuscar.addEventListener("click", function(){
     let pesquisa = inputBuscar.value
     let resultadoPesquisa = busca(pesquisa)
 
+    if(pesquisa.toLowerCase == "Hortifruti" || pesquisa == "hortifuti" || pesquisa == "hortifrute"){
+        return hortifruti()
+    }else if(pesquisa == "Panificadora" || pesquisa == "panificadora"){
+        return panificadora()
+    }else if(pesquisa == "Laticinios" || pesquisa == "laticinios"){
+        return laticinios()
+    }
     listarProdutosBusca(resultadoPesquisa)
 
     inputBuscar.value = ""
