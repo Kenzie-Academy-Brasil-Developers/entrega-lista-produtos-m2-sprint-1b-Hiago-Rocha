@@ -32,7 +32,7 @@ function listarProdutos(produtos){
 
 listarProdutos(produtos)
 
-function listar(produtos){
+function listarhortifruti(produtos){
     let newArr = []
     for(let i=0;i<produtos.length;i++){
         let item = produtos[i]
@@ -160,7 +160,7 @@ botaoBuscar.addEventListener("click", function(){
     let pesquisa = inputBuscar.value
     let resultadoPesquisa = busca(pesquisa)
 
-    if(pesquisa.toLowerCase == "Hortifruti" || pesquisa == "hortifuti" || pesquisa == "hortifrute"){
+    if(pesquisa == "Hortifruti" || pesquisa == "hortifuti" || pesquisa == "hortifrute"){
         return hortifruti()
     }else if(pesquisa == "Panificadora" || pesquisa == "panificadora"){
         return panificadora()
