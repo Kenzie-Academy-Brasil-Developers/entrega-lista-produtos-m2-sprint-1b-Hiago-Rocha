@@ -164,7 +164,7 @@ botaoBuscar.addEventListener("click", function(){
         return hortifruti()
     }else if(pesquisa == "Panificadora" || pesquisa == "panificadora"){
         return panificadora()
-    }else if(pesquisa == "Laticinios" || pesquisa == "laticinios" || pesquisa == "laticínios"){
+    }else if(pesquisa == "Laticinios" || pesquisa == "laticinios" || pesquisa == "laticínios" || "Laticínios"){
         return laticinios()
     }
     listarProdutosBusca(resultadoPesquisa)
