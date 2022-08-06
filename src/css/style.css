@@ -161,6 +161,7 @@ margin: 10px 0 15px;
 color: #212529;
 }
 
+
 .containerListaProdutos ul li p {
 font-size: 0.7rem;
 color: #868e96;
@@ -175,6 +176,7 @@ display: inline-block;
 color: #212529;
 }
 .containerListaProdutos ul li ol {
+margin-top: 10px;    
 list-style: decimal;
 color: #868e96;
 font-size: 12px;
@@ -202,4 +204,130 @@ display: flex;
 justify-content: space-between;
 padding: 5px;
 }
- 
+
+/* container do Carrinho */
+
+.carrinho{
+}
+
+
+.none{
+    display: none;
+}
+
+.DivCarrinho{
+    display: flex;
+    background-color: #12b886;
+    width: 290px;
+    height: 57px;
+    border-radius: 5px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.DivCarrinho img{
+    width: 14px;
+    height: 16px;
+    margin: 10px;
+}
+
+.DivCarrinho h1{
+    font-size: 16px;
+    line-height: 27px;
+    color: #ffffff;
+    padding: 5px;
+}
+
+.lista-carrinho{
+    width: 290px;
+    overflow-y: scroll;
+    max-height: 400px;
+}
+.lista-carrinho img{
+    margin-left: 100px;
+    margin-top: 50px;
+    width: 50px;
+    height: 50px;
+}
+.lista-carrinho p{
+    font-size: 14px;
+    line-height: 24px;
+    color: #868E96;
+}
+.lista-carrinho li{
+    display: flex;
+}
+
+.lista-carrinho li img{
+    width: 80px;
+    height: 80px;
+    margin: 8px;
+}
+
+.lista-carrinho li h3{
+    margin: 8px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.lista-carrinho li span{
+    margin: 8px;
+    font-size: 12px;
+    line-height: 16px;
+}
+.lista-carrinho li p{
+    margin: 8px;
+    font-size: 14px;
+    line-height: 24px;
+}
+.lista-carrinho li button{
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+}
+.lista-carrinho li button img{
+    width: 8px;
+    height: 10px;
+}
+
+.lixeira{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 150px;
+}
+
+.quantidade{
+    display: flex;
+    justify-content: space-between;
+    width: 290px;
+    height: 59px;
+}
+
+.quantidade p{
+    margin-top: 7px;
+    font-size: 15px;
+    line-height: 13px;
+}
+
+.quantidade span{
+    margin-top: 7px;
+    font-size: 15px;
+    line-height: 13px;
+}
+
+.Total{
+    display: flex;
+    justify-content: space-between;
+    width: 290px;
+    height: 59px;
+}
+
+.Total p{
+    font-size: 15px;
+    line-height: 13px;
+}
+
+.Total span{
+    font-size: 15px;
+    line-height: 13px;
+}

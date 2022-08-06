@@ -6,16 +6,14 @@ let tagSpan = document.querySelector("#valor")
  
  function calculaTotal(lista){
      
-     valorTotal = 0.00
+     let valorTotal = 0.00
      let listaValores = lista.map(x => x.preco)
-     console.log(listaValores)
      
      for(let i=0;i<listaValores.length;i++){
          valorTotal += listaValores[i]
      }
-     console.log(valorTotal)
      valorTotal = valorTotal.toFixed(2)
-     tagSpan.innerText = `R$ ${valorTotal}`
+     return `R$ ${valorTotal}`
  }
 
 calculaTotal(produtos)
@@ -36,7 +34,7 @@ function listarhortifruti(produtos){
     let newArr = []
     for(let i=0;i<produtos.length;i++){
         let item = produtos[i]
-        if(item.categoria == 'fruta'){
+        if(item.secao == 'Hortifruti'){
             newArr.push(item)
             let cardCriado = criarCard(item)
             tagUl.appendChild(cardCriado)
@@ -85,25 +83,130 @@ function listarProdutosBusca(resultadoPesquisa){
 
 function criarCard(item){
     
+    let componentes = item.componentes
     let tagLi   = document.createElement("li")
     tagLi.setAttribute("class", "removedor")
-    let tagImg  = document.createElement("img")
-    let tagH3   = document.createElement("h3")
-    let tagSpan = document.createElement("span")
-    let tagP    = document.createElement("p")
+    let tagImg     = document.createElement("img")
+    let tagH3      = document.createElement("h3")
+    let tagSpan    = document.createElement("span")
+    let tagP       = document.createElement("p")
+    let tagBtn     = document.createElement("button")
+    tagBtn.addEventListener("click", () => {
+        addCarrinho(item)
+        let noneClass = document.querySelectorAll(".none")
+        noneClass.forEach(item => item.classList.remove('none'))
+        const valorTotal = document.querySelector(".tudo")
+        const quantidade = document.querySelector(".quantia")
+        const sacola = document.querySelector(".sacola")
+        const sacolaText = document.querySelector(".sacola-texto")
+        sacola.classList.add('none')
+        sacolaText.classList.add('none')
+        quantidade.innerText = arrCarrinho.length
+        valorTotal.innerText = calculaTotal(arrCarrinho)
+        
+    })
+    const divPai   = document.createElement("div")
+    const divSecao = document.createElement("div")
+    const divBtn   = document.createElement("div")
+    const tagOl    = document.createElement("ol")
+    const li1      = document.createElement("li")
+    const li2      = document.createElement("li")
+    const li3      = document.createElement("li")
+    
 
-    tagImg.src = item.img
-    tagImg.alt = item.nome
-    tagH3.innerText = item.nome
+    tagImg.src        = item.img
+    tagImg.alt        = item.nome
+    tagH3.innerText   = item.nome
     tagSpan.innerText = item.secao
-    tagP.innerText = `R$ ${item.preco.toFixed(2)}`
+    tagP.innerText    = `R$ ${item.preco.toFixed(2)}`
+    tagBtn.innerText  = "Comprar"
+    tagOl.append(li1,li2,li3)
+    
+    for(let i=0;i<componentes.length;i++){
+        let componente = componentes[i]
+        if(i == 0){
+            li1.innerText = componente
+        }else if(i == 1){
+            li2.innerText = componente
+        }else if(i == 3){
+            const li4     = document.createElement("li")
+            li4.innerText = componente
+            tagOl.appendChild(li4)
+        }else if(i == 2)
+            li3.innerText = componente
+            
+    }
 
     tagLi.appendChild(tagImg)
     tagLi.appendChild(tagH3)
     tagLi.appendChild(tagSpan)
-    tagLi.appendChild(tagP)
+    tagLi.appendChild(tagOl)
+    divPai.appendChild(divSecao)
+    divPai.appendChild(divBtn)
+    tagLi.appendChild(divPai)
+    divSecao.appendChild(tagP)
+    divBtn.appendChild(tagBtn)
 
     return tagLi
+}
+
+let arrCarrinho = []
+
+function addCarrinho(item){
+    arrCarrinho.push(item)
+    const tagUl   = document.querySelector(".lista-carrinho")
+    const divImg  = document.createElement("div")
+    const divElem = document.createElement("div")
+    const divBtn  = document.createElement("div")
+    divBtn.setAttribute("class", "lixeira")
+    const tagLi   = document.createElement("li")
+    const tagImg  = document.createElement("img")
+    const tagH3   = document.createElement("h3")
+    const tagSpan = document.createElement("span")
+    const tagP    = document.createElement("p")
+    const tagBtn  = document.createElement("button")
+    tagBtn.addEventListener("click",() => {
+        tagLi.remove()
+        arrCarrinho.splice(-1, 1)
+        if(arrCarrinho.length == 0){
+            let noneClass = document.querySelectorAll(".batman")
+            noneClass.forEach(item => item.classList.add('none'))
+        }
+        const valorTotal = document.querySelector(".tudo")
+        const quantidade = document.querySelector(".quantia")
+        quantidade.innerText = arrCarrinho.length
+        valorTotal.innerText = calculaTotal(addCarrinho)
+    })
+    const imgBtn     = document.createElement("img")
+    const quantidade = document.createElement("p")
+    const valorQuant = document.createElement("span")
+    const total      = document.createElement("span")
+    const valorTotal = document.createElement("p")
+    const divQuantia = document.querySelector(".quantidade")
+    const divTotal   = document.querySelector(".Total")
+
+    tagImg.src           = item.img
+    tagImg.alt           = item.nome
+    tagH3.innerText      = item.nome
+    tagSpan.innerText    = item.secao
+    tagP.innerText       = `R$ ${item.preco.toFixed(2)}`
+    imgBtn.src           = `./src/img/trash.png`
+    imgBtn.alt           = "icone de lixeira"
+   
+    valorQuant.innerText = arrCarrinho.length
+    
+    valorTotal.innerText = calculaTotal(arrCarrinho)
+
+
+    tagUl.appendChild(tagLi)
+    tagLi.appendChild(divImg)
+    tagLi.appendChild(divElem)
+    tagLi.appendChild(divBtn)
+    divImg.appendChild(tagImg)
+    divElem.append(tagH3,tagSpan, tagP)
+    divBtn.appendChild(tagBtn)
+    tagBtn.appendChild(imgBtn)
+
 }
 
 let botãoGeral = document.querySelector(".geral")
@@ -160,14 +263,15 @@ botaoBuscar.addEventListener("click", function(){
     let pesquisa = inputBuscar.value
     let resultadoPesquisa = busca(pesquisa)
 
-    if(pesquisa == "Hortifruti" || pesquisa == "hortifuti" || pesquisa == "hortifrute"){
+    if(pesquisa == "Hortifruti" || pesquisa == "hortifuti" || pesquisa == "hortifrute" || pesquisa == "Frutas" || pesquisa == "frutas"){
         return hortifruti()
-    }else if(pesquisa == "Panificadora" || pesquisa == "panificadora"){
+    }else if(pesquisa == "Panificadora" || pesquisa == "panificadora" || pesquisa == "Pães" || pesquisa == "pães" || pesquisa == "paes"){
         return panificadora()
-    }else if(pesquisa == "Laticinios" || pesquisa == "laticinios" || pesquisa == "laticínios" || "Laticínios"){
+    }else if(pesquisa == "Laticinios" || pesquisa == "laticinios" || pesquisa == "laticínios" || pesquisa == "Laticínios" || pesquisa == "Leite" || pesquisa == "leite"){
         return laticinios()
+    }else{
+        listarProdutosBusca(resultadoPesquisa)
     }
-    listarProdutosBusca(resultadoPesquisa)
 
     inputBuscar.value = ""
 })
