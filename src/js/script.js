@@ -171,6 +171,10 @@ function addCarrinho(item){
         if(arrCarrinho.length == 0){
             let noneClass = document.querySelectorAll(".batman")
             noneClass.forEach(item => item.classList.add('none'))
+            const sacola = document.querySelector(".sacola")
+            const sacolaText = document.querySelector(".sacola-texto")
+            sacola.classList.remove('none')
+            sacolaText.classList.remove('none')
         }
         const valorTotal = document.querySelector(".tudo")
         const quantidade = document.querySelector(".quantia")
