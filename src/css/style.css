@@ -152,7 +152,7 @@ main {
     color: #212529;
 }
 .containerListaProdutos ul li ol {
-    
+    display: none;
     margin-top: 10px;    
     list-style: decimal;
     color: #868e96;
@@ -445,7 +445,7 @@ main {
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 40px;
-    width: 90%;
+    width: 100%;
     }
     
     .containerListaProdutos ul li {
@@ -485,6 +485,8 @@ main {
     color: #212529;
     }
 .containerListaProdutos ul li ol {
+    display: flex;
+    flex-direction: column;
     margin-top: 10px;    
     list-style: decimal;
     color: #868e96;
